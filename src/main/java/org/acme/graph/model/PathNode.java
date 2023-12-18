@@ -3,7 +3,7 @@ package org.acme.graph.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class PathNode {
-	
+
 	/**
 	 * dijkstra - coût pour atteindre le sommet
 	 */
@@ -16,16 +16,13 @@ public class PathNode {
 	 * dijkstra - indique si le sommet est visité
 	 */
 	private boolean visited;
-	
+
 	public PathNode(double cost, Edge reachingEdge, boolean visited) {
 		this.cost = cost;
 		this.reachingEdge = reachingEdge;
 		this.visited = visited;
 	}
-	
-	
-	
-	
+
 	@JsonIgnore
 	public double getCost() {
 		return cost;
@@ -51,6 +48,5 @@ public class PathNode {
 	public void setVisited(boolean visited) {
 		this.visited = visited;
 	}
-
 
 }

@@ -24,7 +24,7 @@ public class Path {
 		}
 		return this.length;
 	}
-	
+
 	public List<Edge> getEdges() {
 		return this.edges;
 	}

@@ -1,19 +1,22 @@
 package org.acme.graph.demo;
 
+import static com.googlecode.cqengine.query.QueryFactory.ascending;
+import static com.googlecode.cqengine.query.QueryFactory.equal;
+import static com.googlecode.cqengine.query.QueryFactory.orderBy;
+import static com.googlecode.cqengine.query.QueryFactory.queryOptions;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import java.util.Optional;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import com.googlecode.cqengine.ConcurrentIndexedCollection;
 import com.googlecode.cqengine.IndexedCollection;
 import com.googlecode.cqengine.index.hash.HashIndex;
 import com.googlecode.cqengine.index.navigable.NavigableIndex;
 import com.googlecode.cqengine.query.Query;
-import static com.googlecode.cqengine.query.QueryFactory.*;
-
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * /!\ NE PAS LIRE EN DEBUT DE TP /!\
@@ -79,9 +82,7 @@ public class CqEngineTest {
 		 * Recherche du sommet non visité le plus proche du point de départ.
 		 */
 		Optional<DemoNode> result1 = this.nodes.retrieve(query, queryOptions(orderBy(ascending(DemoNode.COST))))
-            .stream()
-			.findFirst()
-        ;
+				.stream().findFirst();
 		assertFalse(result1.isEmpty());
 		DemoNode node1 = result1.get();
 		assertEquals("node-1", node1.id);
@@ -98,9 +99,7 @@ public class CqEngineTest {
 		 * Recherche du sommet non visité le plus proche du point de départ.
 		 */
 		Optional<DemoNode> result2 = this.nodes.retrieve(query, queryOptions(orderBy(ascending(DemoNode.COST))))
-            .stream()
-			.findFirst()
-        ;
+				.stream().findFirst();
 		assertFalse(result2.isEmpty());
 
 		DemoNode node2 = result2.get();

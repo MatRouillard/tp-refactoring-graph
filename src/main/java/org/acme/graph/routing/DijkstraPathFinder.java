@@ -23,7 +23,7 @@ public class DijkstraPathFinder {
 	private static final Logger log = LogManager.getLogger(DijkstraPathFinder.class);
 
 	private Graph graph;
-	
+
 	private PathTree pathTree;
 
 	public DijkstraPathFinder(Graph graph) {
@@ -39,13 +39,13 @@ public class DijkstraPathFinder {
 	 */
 	public Path findPath(Vertex origin, Vertex destination) {
 		log.info("findPath({},{})...", origin, destination);
-		pathTree = new PathTree(this.graph, origin);
+		pathTree = new PathTree(origin);
 		Vertex current;
 		while ((current = findNextVertex()) != null) {
 			visit(current);
-			if (pathTree.getNode(destination).getReachingEdge() != null) {
+			if (pathTree.isReached(destination)) {
 				log.info("findPath({},{}) : path found", origin, destination);
-				return pathTree.buildPath(destination);
+				return pathTree.getPath(destination);
 			}
 		}
 		throw new NotFoundException(String.format("Path not found from '%s' to '%s'", origin, destination));
@@ -69,16 +69,16 @@ public class DijkstraPathFinder {
 			 * Convervation de arc permettant d'atteindre le sommet avec un meilleur coût
 			 * sachant que les sommets non atteint ont pour coût "POSITIVE_INFINITY"
 			 */
-			double newCost = pathTree.getNode(vertex).getCost() + outEdge.getCost();
-			if (newCost < pathTree.getNode(reachedVertex).getCost()) {
-				pathTree.getNode(reachedVertex).setCost(newCost);
-				pathTree.getNode(reachedVertex).setReachingEdge(outEdge);
+			double newCost = pathTree.getOrCreateVertex(vertex).getCost() + outEdge.getCost();
+			if (newCost < pathTree.getOrCreateVertex(reachedVertex).getCost()) {
+				pathTree.getOrCreateVertex(reachedVertex).setCost(newCost);
+				pathTree.getOrCreateVertex(reachedVertex).setReachingEdge(outEdge);
 			}
 		}
 		/*
 		 * On marque le sommet comme visité
 		 */
-		pathTree.getNode(vertex).setVisited(true);
+		pathTree.getOrCreateVertex(vertex).setVisited(true);
 	}
 
 	/**
@@ -93,15 +93,15 @@ public class DijkstraPathFinder {
 		Vertex result = null;
 		for (Vertex vertex : graph.getVertices()) {
 			// sommet déjà visité?
-			if (pathTree.getNode(vertex).isVisited()) {
+			if (pathTree.getOrCreateVertex(vertex).isVisited()) {
 				continue;
 			}
 			// sommet non atteint?
-			if (pathTree.getNode(vertex).getCost() == Double.POSITIVE_INFINITY) {
+			if (pathTree.getOrCreateVertex(vertex).getCost() == Double.POSITIVE_INFINITY) {
 				continue;
 			}
 			// sommet le plus proche de la source?
-			if (pathTree.getNode(vertex).getCost() < minCost) {
+			if (pathTree.getOrCreateVertex(vertex).getCost() < minCost) {
 				result = vertex;
 			}
 		}

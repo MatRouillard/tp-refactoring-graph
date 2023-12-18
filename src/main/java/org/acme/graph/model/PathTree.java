@@ -14,14 +14,12 @@ public class PathTree {
 	 * @param graph
 	 * @param source
 	 */
-	public PathTree(Graph graph, Vertex source) {
-		for (Vertex vertex : graph.getVertices()) {
-			PathNode node = new PathNode(source == vertex ? 0.0 : Double.POSITIVE_INFINITY, null, false);
-			nodes.put(vertex, node);
-		}
+	public PathTree(Vertex source) {
+		PathNode node = new PathNode(0.0, null, false);
+		nodes.put(source, node);
 	}
 
-	public PathNode getNode(Vertex vertex) {
+	private PathNode getNode(Vertex vertex) {
 		return nodes.get(vertex);
 	}
 
@@ -31,10 +29,12 @@ public class PathTree {
 	 * @param target
 	 * @return
 	 */
-	public Path buildPath(Vertex target) {
+	public Path getPath(Vertex destination) {
+		assert (isReached(destination));
+
 		Path path = new Path();
 
-		Edge current = getNode(target).getReachingEdge();
+		Edge current = getNode(destination).getReachingEdge();
 		do {
 			path.getEdges().add(current);
 			current = getNode(current.getSource()).getReachingEdge();
@@ -42,6 +42,18 @@ public class PathTree {
 
 		Collections.reverse(path.getEdges());
 		return path;
+	}
+
+	public boolean isReached(Vertex destination) {
+		return getNode(destination).getReachingEdge() != null;
+	}
+
+	public PathNode getOrCreateVertex(Vertex vertex) {
+		if (!nodes.containsKey(vertex)) {
+			PathNode node = new PathNode(Double.POSITIVE_INFINITY, null, false);
+			nodes.put(vertex, node);
+		}
+		return getNode(vertex);
 	}
 
 }
