@@ -32,8 +32,8 @@ public class PathTree {
 	 * @return
 	 */
 	public Path getPath(Vertex destination) {
-		assert(isReached(destination));
-		
+		assert (isReached(destination));
+
 		Path path = new Path();
 
 		Edge current = getNode(destination).getReachingEdge();
@@ -48,6 +48,14 @@ public class PathTree {
 
 	public boolean isReached(Vertex destination) {
 		return getNode(destination).getReachingEdge() != null;
+	}
+
+	public PathNode getOrCreateVertex(Vertex destination) {
+		if (!isReached(destination)) {
+			PathNode node = new PathNode(Double.POSITIVE_INFINITY, null, false);
+			nodes.put(destination, node);
+		}
+		return getNode(destination);
 	}
 
 }
