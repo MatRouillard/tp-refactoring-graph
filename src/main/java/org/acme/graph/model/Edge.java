@@ -33,11 +33,6 @@ public class Edge {
 	 */
 	private Vertex target;
 
-	@Deprecated
-	public Edge() {
-
-	}
-
 	public Edge(Vertex source, Vertex target) {
 		assert (source != null);
 		assert (target != null);
