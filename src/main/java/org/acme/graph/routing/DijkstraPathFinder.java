@@ -1,17 +1,17 @@
 package org.acme.graph.routing;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.acme.graph.errors.NotFoundException;
 import org.acme.graph.model.Edge;
 import org.acme.graph.model.Graph;
 import org.acme.graph.model.Path;
+import org.acme.graph.model.PathNode;
 import org.acme.graph.model.Vertex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.locationtech.jts.geom.Coordinate;
 
 /**
  * 
@@ -25,6 +25,8 @@ public class DijkstraPathFinder {
 	private static final Logger log = LogManager.getLogger(DijkstraPathFinder.class);
 
 	private Graph graph;
+	
+	private Map<Vertex, PathNode> nodes;
 
 	public DijkstraPathFinder(Graph graph) {
 		this.graph = graph;
