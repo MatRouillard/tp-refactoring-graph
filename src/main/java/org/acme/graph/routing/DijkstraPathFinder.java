@@ -23,7 +23,7 @@ public class DijkstraPathFinder {
 	private static final Logger log = LogManager.getLogger(DijkstraPathFinder.class);
 
 	private Graph graph;
-	
+
 	private PathTree pathTree;
 
 	public DijkstraPathFinder(Graph graph) {
@@ -45,7 +45,7 @@ public class DijkstraPathFinder {
 			visit(current);
 			if (pathTree.isReached(destination)) {
 				log.info("findPath({},{}) : path found", origin, destination);
-				return pathTree.buildPath(destination);
+				return pathTree.getPath(destination);
 			}
 		}
 		throw new NotFoundException(String.format("Path not found from '%s' to '%s'", origin, destination));
