@@ -26,8 +26,10 @@ public class Vertex {
 	 */
 	private Coordinate coordinate;
 
+	@JsonIgnore
 	private List<Edge> inEdges = new ArrayList<Edge>();
 
+	@JsonIgnore
 	private List<Edge> outEdges = new ArrayList<Edge>();
 
 	/**
