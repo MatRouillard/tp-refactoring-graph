@@ -17,6 +17,15 @@ public class PathNode {
 	 */
 	private boolean visited;
 	
+	public PathNode(double cost, Edge reachingEdge, boolean visited) {
+		this.cost = cost;
+		this.reachingEdge = reachingEdge;
+		this.visited = visited;
+	}
+	
+	
+	
+	
 	@JsonIgnore
 	public double getCost() {
 		return cost;
