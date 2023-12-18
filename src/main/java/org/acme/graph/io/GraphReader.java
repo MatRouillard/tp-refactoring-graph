@@ -96,7 +96,7 @@ public class GraphReader {
 		}
 		if (sens.equals(DOUBLE_SENS) || sens.equals(SENS_INVERSE)) {
 			/* Création de l'arc pour le parcours en sens opposé */
-			Edge reverseEdge = new Edge(source, target);
+			Edge reverseEdge = new Edge(target, source);
 			reverseEdge.setId(id + "-reverse");
 			graph.getEdges().add(reverseEdge);
 		}
