@@ -16,12 +16,8 @@ public class FindPathController {
 	private Graph graph;
 
 	@GetMapping(value = "/find-path")
-	public Path findPath(
-		@RequestParam(value = "origin", required = true)
-		String originId,
-		@RequestParam(value = "destination", required = true)
-		String destinationId
-	) {
+	public Path findPath(@RequestParam(value = "origin", required = true) String originId,
+			@RequestParam(value = "destination", required = true) String destinationId) {
 		DijkstraPathFinder pathFinder = new DijkstraPathFinder(graph);
 		Vertex origin = graph.findVertex(originId);
 		Vertex destination = graph.findVertex(destinationId);

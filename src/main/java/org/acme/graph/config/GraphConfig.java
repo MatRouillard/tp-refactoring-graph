@@ -44,11 +44,8 @@ public class GraphConfig {
 		GraphReader reader = new GraphReader();
 		Graph graph = reader.read(file);
 		long endTime = System.currentTimeMillis();
-		log.info("Graph loaded in {} milliseconds (num_vertices={}, num_edges={})",
-			(endTime - startTime),
-			graph.getVertices().size(),
-			graph.getEdges().size()
-		);
+		log.info("Graph loaded in {} milliseconds (num_vertices={}, num_edges={})", (endTime - startTime),
+				graph.getVertices().size(), graph.getEdges().size());
 		return graph;
 	}
 

@@ -1,11 +1,11 @@
 package org.acme.graph.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.locationtech.jts.geom.Coordinate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 
