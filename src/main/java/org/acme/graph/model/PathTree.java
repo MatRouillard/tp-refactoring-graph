@@ -31,10 +31,12 @@ public class PathTree {
 	 * @param target
 	 * @return
 	 */
-	public Path getPath(Vertex target) {
+	public Path getPath(Vertex destination) {
+		assert(isReached(destination));
+		
 		Path path = new Path();
 
-		Edge current = getNode(target).getReachingEdge();
+		Edge current = getNode(destination).getReachingEdge();
 		do {
 			path.getEdges().add(current);
 			current = getNode(current.getSource()).getReachingEdge();
