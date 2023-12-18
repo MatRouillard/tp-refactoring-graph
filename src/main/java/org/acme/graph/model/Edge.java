@@ -33,8 +33,16 @@ public class Edge {
 	 */
 	private Vertex target;
 
+	@Deprecated
 	public Edge() {
 
+	}
+
+	public Edge(Vertex source, Vertex target) {
+		assert (source != null);
+		assert (target != null);
+		this.source = source;
+		this.target = target;
 	}
 
 	public String getId() {
@@ -87,10 +95,7 @@ public class Edge {
 	@JsonSerialize(using = GeometrySerializer.class)
 	public LineString getGeometry() {
 		GeometryFactory gf = new GeometryFactory();
-		return gf.createLineString(new Coordinate[] {
-			source.getCoordinate(),
-			target.getCoordinate()
-		});
+		return gf.createLineString(new Coordinate[] { source.getCoordinate(), target.getCoordinate() });
 	}
 
 	@Override
