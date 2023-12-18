@@ -43,7 +43,7 @@ public class DijkstraPathFinder {
 		Vertex current;
 		while ((current = findNextVertex()) != null) {
 			visit(current);
-			if (pathTree.getNode(destination).getReachingEdge() != null) {
+			if (pathTree.isReached(destination)) {
 				log.info("findPath({},{}) : path found", origin, destination);
 				return pathTree.buildPath(destination);
 			}

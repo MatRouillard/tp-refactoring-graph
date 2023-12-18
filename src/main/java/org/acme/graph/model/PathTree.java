@@ -43,5 +43,9 @@ public class PathTree {
 		Collections.reverse(path.getEdges());
 		return path;
 	}
+	
+	public boolean isReached(Vertex destination) {
+		return getNode(destination).getReachingEdge() != null;
+	}
 
 }
